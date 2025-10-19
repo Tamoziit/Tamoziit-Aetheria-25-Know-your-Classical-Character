@@ -193,7 +193,7 @@ const HeroSection = () => {
                   delay: 0.8
                 }}
               >
-                Atheria
+                Aetheria
               </motion.span>
             </div>
             <motion.span 
