@@ -182,6 +182,7 @@ const InteractiveSection = () => {
               transition={{ duration: 0.8, delay: 1.3 }}
             >
               <motion.button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 className="vintage-button text-white font-serif font-semibold text-lg px-10 py-4 rounded-full inline-flex items-center gap-3 group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -194,7 +195,7 @@ const InteractiveSection = () => {
                 }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                <span>Preview Game Interface</span>
+                <span>Start Your Journey</span>
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 2, repeat: Infinity, ease: "linear" }}

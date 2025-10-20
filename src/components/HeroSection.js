@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import QuestionPage from './QuestionPage';
+import ResultPage from './ResultPage';
+import LeaderboardPage from './LeaderboardPage';
 
 const HeroSection = () => {
+  const [currentView, setCurrentView] = useState('hero'); // 'hero', 'question', 'result', 'leaderboard'
+  const [quizResult, setQuizResult] = useState(null);
+
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     animate: { opacity: 1, y: 0 },
@@ -230,6 +236,7 @@ const HeroSection = () => {
         {/* CTA Button */}
         <motion.div variants={fadeInUp}>
           <motion.button
+            onClick={() => setCurrentView('question')}
             className="vintage-button text-white font-serif font-semibold text-lg sm:text-xl px-8 sm:px-12 py-4 sm:py-5 rounded-full inline-flex items-center gap-3 group"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -270,6 +277,51 @@ const HeroSection = () => {
           />
         </div>
       </motion.div>
+
+      {/* Modals */}
+      {currentView === 'question' && (
+        <QuestionPage 
+          onClose={() => setCurrentView('hero')}
+          onComplete={(result) => {
+            console.log('Quiz completed with result:', result);
+            setQuizResult(result);
+            
+            // Save to localStorage for leaderboard
+            const savedResults = JSON.parse(localStorage.getItem('aetheria_leaderboard') || '[]');
+            const newEntry = {
+              name: `Player_${Date.now()}`, // Could be enhanced to ask for name
+              character: result.character,
+              score: result.score,
+              date: new Date().toISOString().split('T')[0],
+              timestamp: Date.now()
+            };
+            savedResults.push(newEntry);
+            savedResults.sort((a, b) => b.score - a.score); // Sort by score descending
+            localStorage.setItem('aetheria_leaderboard', JSON.stringify(savedResults.slice(0, 50))); // Keep top 50
+            
+            setCurrentView('result');
+          }}
+        />
+      )}
+      
+      {currentView === 'result' && quizResult && (
+        <ResultPage 
+          result={quizResult}
+          onClose={() => setCurrentView('hero')}
+          onPlayAgain={() => {
+            setQuizResult(null);
+            setCurrentView('question');
+          }}
+          onViewLeaderboard={() => setCurrentView('leaderboard')}
+        />
+      )}
+      
+      {currentView === 'leaderboard' && (
+        <LeaderboardPage 
+          onClose={() => setCurrentView('hero')}
+          onBackToHome={() => setCurrentView('hero')}
+        />
+      )}
     </section>
   );
 };
