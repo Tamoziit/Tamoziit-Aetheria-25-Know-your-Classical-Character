@@ -90,6 +90,117 @@ const LeaderboardPage = ({ onClose, onBackToHome }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
+      {/* 3D Leaderboard Competition Bubbles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Leaderboard Trophy Bubbles */}
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={`leaderboard-bubble-large-${i}`}
+            className="absolute rounded-full"
+            style={{
+              left: `${12 + (i * 18)}%`,
+              top: `${10 + Math.sin(i * 2.5) * 40}%`,
+              width: `${30 + Math.random() * 50}px`,
+              height: `${30 + Math.random() * 50}px`,
+              background: `radial-gradient(circle at 35% 35%, 
+                rgba(255, 255, 255, 0.9) 0%, 
+                rgba(212, 175, 55, 0.6) 25%, 
+                rgba(255, 215, 0, 0.4) 50%, 
+                rgba(244, 228, 166, 0.2) 75%, 
+                transparent 100%)`,
+              backdropFilter: 'blur(3px)',
+              border: '2px solid rgba(255, 215, 0, 0.4)',
+              boxShadow: '0 15px 45px rgba(212, 175, 55, 0.3)'
+            }}
+            animate={{
+              y: [0, -80, -160, -240],
+              x: [0, Math.sin(i * 2) * 60, Math.cos(i * 3) * 40, 0],
+              scale: [0.6, 1.3, 1.6, 0],
+              opacity: [0, 1, 0.8, 0],
+              rotateX: [0, 120, 240, 360],
+              rotateY: [0, 90, 180, 270, 360],
+              rotateZ: [0, 45, 90, 135, 180],
+            }}
+            transition={{
+              duration: 10 + Math.random() * 5,
+              repeat: Infinity,
+              delay: i * 2,
+              ease: "easeOut"
+            }}
+          />
+        ))}
+        
+        {/* Leaderboard Ranking Bubbles */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={`leaderboard-bubble-medium-${i}`}
+            className="absolute rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${50 + Math.random() * 50}%`,
+              width: `${18 + Math.random() * 28}px`,
+              height: `${18 + Math.random() * 28}px`,
+              background: `radial-gradient(circle at 30% 30%, 
+                rgba(255, 255, 255, 0.8) 0%, 
+                rgba(255, 215, 0, 0.5) 30%, 
+                rgba(212, 175, 55, 0.4) 60%, 
+                rgba(139, 69, 19, 0.2) 80%, 
+                transparent 100%)`,
+              backdropFilter: 'blur(2px)',
+              border: '1px solid rgba(255, 215, 0, 0.3)',
+            }}
+            animate={{
+              y: [0, -100, -200, -300],
+              x: [0, Math.sin(i * 3) * 50, Math.cos(i * 4) * 30, 0],
+              scale: [0.4, 1, 1.4, 0],
+              opacity: [0, 1, 0.7, 0],
+              rotateZ: [0, 180, 360],
+              rotateY: [0, 180, 360],
+            }}
+            transition={{
+              duration: 8 + Math.random() * 4,
+              repeat: Infinity,
+              delay: i * 1.3,
+              ease: "easeOut"
+            }}
+          />
+        ))}
+
+        {/* Leaderboard Victory Sparkles */}
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={`leaderboard-bubble-small-${i}`}
+            className="absolute rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${70 + Math.random() * 30}%`,
+              width: `${6 + Math.random() * 12}px`,
+              height: `${6 + Math.random() * 12}px`,
+              background: `radial-gradient(circle at 25% 25%, 
+                rgba(255, 255, 255, 1) 0%, 
+                rgba(255, 215, 0, 0.8) 40%, 
+                rgba(212, 175, 55, 0.6) 70%, 
+                transparent 100%)`,
+              filter: 'blur(0.4px)',
+              border: '0.3px solid rgba(255, 215, 0, 0.6)',
+              boxShadow: '0 0 10px rgba(255, 215, 0, 0.4)'
+            }}
+            animate={{
+              y: [0, -140, -280, -420],
+              x: [0, Math.sin(i * 5) * 35, Math.cos(i * 3) * 20, 0],
+              scale: [0.3, 0.8, 1.1, 0],
+              opacity: [0, 1, 0.9, 0],
+              rotateZ: [0, 360, 720],
+            }}
+            transition={{
+              duration: 6 + Math.random() * 3,
+              repeat: Infinity,
+              delay: i * 0.4,
+              ease: "easeOut"
+            }}
+          />
+        ))}
+      </div>
       <motion.div
         className="bg-gradient-to-br from-parchment via-gold-light/30 to-parchment max-w-6xl w-full max-h-[95vh] overflow-y-auto rounded-3xl shadow-2xl relative"
         initial={{ scale: 0.8, y: 50 }}
