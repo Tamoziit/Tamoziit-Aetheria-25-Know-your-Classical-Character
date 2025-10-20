@@ -1,0 +1,244 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const ResultPage = ({ result, onClose, onPlayAgain, onViewLeaderboard }) => {
+  const [activeTab, setActiveTab] = useState('result');
+
+  const shareResult = () => {
+    const shareText = `I just discovered I'm ${result.character.name} - ${result.character.title}! 🎭✨ Take the Aetheria 2025 quiz to find your match!`;
+    
+    if (navigator.share) {
+      navigator.share({
+        title: 'My Literary Character Match',
+        text: shareText,
+        url: window.location.href
+      });
+    } else {
+      navigator.clipboard.writeText(shareText);
+      alert('Result copied to clipboard!');
+    }
+  };
+
+  return (
+    <motion.div
+      className="fixed inset-0 bg-gradient-to-br from-black/90 via-bronze/20 to-black/90 flex items-center justify-center z-50 p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        className="bg-gradient-to-br from-parchment via-gold-light/30 to-parchment max-w-5xl w-full max-h-[95vh] overflow-y-auto rounded-3xl shadow-2xl relative"
+        initial={{ scale: 0.8, y: 50 }}
+        animate={{ scale: 1, y: 0 }}
+        exit={{ scale: 0.8, y: 50 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-6 right-6 w-10 h-10 bg-bronze/20 hover:bg-bronze/30 rounded-full flex items-center justify-center text-bronze hover:text-bronze-dark transition-colors z-10"
+        >
+          ✕
+        </button>
+
+        {/* Header Section */}
+        <div className="relative p-8 text-center border-b border-gold/20">
+          {/* Celebration Animation */}
+          <motion.div 
+            className="absolute inset-0 pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            {[...Array(12)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-2 h-2 bg-gold rounded-full"
+                style={{
+                  left: `${20 + (i * 7)}%`,
+                  top: `${30 + Math.sin(i) * 20}%`,
+                }}
+                animate={{
+                  scale: [0, 1, 0],
+                  opacity: [0, 1, 0],
+                  y: [0, -50, -100],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  delay: i * 0.2,
+                }}
+              />
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-8xl mb-6"
+          >
+            {result.character.image}
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-bronze mb-3"
+          >
+            You are {result.character.name}!
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="text-xl sm:text-2xl font-elegant text-bronze/80 mb-6"
+          >
+            {result.character.title}
+          </motion.p>
+
+          {/* Score Display */}
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.8, type: "spring", bounce: 0.5 }}
+            className="inline-flex items-center gap-4 bg-gradient-to-r from-gold to-gold-dark text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg"
+          >
+            <span className="text-2xl">🏆</span>
+            <div className="text-center">
+              <div className="text-2xl font-bold">{result.score}%</div>
+              <div className="text-sm opacity-90">{result.correctAnswers}/{result.totalQuestions} Correct</div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Content Tabs */}
+        <div className="p-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1 }}
+          >
+            <div className="flex flex-wrap justify-center gap-2 mb-8">
+              {[
+                { id: 'result', label: 'Your Character', icon: '🎭' },
+                { id: 'traits', label: 'Personality', icon: '🧠' },
+                { id: 'style', label: 'Style Guide', icon: '✨' }
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-6 py-3 rounded-full font-elegant font-semibold transition-all ${
+                    activeTab === tab.id
+                      ? 'bg-gold text-white shadow-lg scale-105'
+                      : 'bg-white/50 text-bronze hover:bg-white/70'
+                  }`}
+                >
+                  <span className="mr-2">{tab.icon}</span>
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white/70 rounded-2xl p-8 min-h-[300px]"
+              >
+                {activeTab === 'result' && (
+                  <div className="text-center">
+                    <div className={`w-full h-3 bg-gradient-to-r ${result.character.color} rounded-full mb-6`}></div>
+                    <p className="text-lg leading-relaxed text-bronze font-elegant mb-6">
+                      {result.character.description}
+                    </p>
+                    <div className="bg-gold/10 rounded-xl p-6 border-l-4 border-gold">
+                      <p className="text-lg italic text-bronze mb-2 font-serif">
+                        "{result.character.quote}"
+                      </p>
+                      <p className="text-sm text-bronze/70 font-elegant">
+                        - {result.character.name}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'traits' && (
+                  <div>
+                    <h3 className="text-2xl font-serif font-bold text-bronze mb-6 text-center">Your Personality Traits</h3>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
+                      {result.character.traits.map((trait, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: index * 0.1 }}
+                          className="bg-gradient-to-r from-gold/20 to-gold-dark/20 text-bronze px-4 py-3 rounded-full text-center font-elegant capitalize font-semibold"
+                        >
+                          {trait}
+                        </motion.div>
+                      ))}
+                    </div>
+                    <div className="text-center">
+                      <p className="text-bronze/80 font-elegant">
+                        <strong>Era:</strong> {result.character.era}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'style' && (
+                  <div>
+                    <h3 className="text-2xl font-serif font-bold text-bronze mb-6 text-center">Your Modern Style Guide</h3>
+                    <p className="text-lg leading-relaxed text-bronze font-elegant text-center">
+                      {result.character.modernStyle}
+                    </p>
+                  </div>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
+
+          {/* Action Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2 }}
+            className="flex flex-wrap justify-center gap-4 mt-8"
+          >
+            <button
+              onClick={onPlayAgain}
+              className="bg-gradient-to-r from-gold to-gold-dark text-white px-8 py-4 rounded-full font-elegant font-semibold hover:shadow-lg transition-all hover:scale-105"
+            >
+              🔄 Play Again
+            </button>
+            <button
+              onClick={onViewLeaderboard}
+              className="bg-gradient-to-r from-purple-500 to-purple-600 text-white px-8 py-4 rounded-full font-elegant font-semibold hover:shadow-lg transition-all hover:scale-105"
+            >
+              🏆 View Leaderboard
+            </button>
+            <button
+              onClick={shareResult}
+              className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-full font-elegant font-semibold hover:shadow-lg transition-all hover:scale-105"
+            >
+              📱 Share Result
+            </button>
+          </motion.div>
+        </div>
+
+        {/* Background decorations */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+          <div className="absolute inset-0 bg-parchment-texture"></div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+export default ResultPage;
