@@ -36,6 +36,111 @@ const InteractiveSection = () => {
         <div className="absolute inset-0 bg-parchment-texture opacity-30"></div>
       </div>
 
+      {/* 3D Bubble Animations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Large Interactive Bubbles */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={`interactive-bubble-large-${i}`}
+            className="absolute rounded-full"
+            style={{
+              left: `${15 + (i * 15)}%`,
+              top: `${10 + Math.sin(i * 2) * 40}%`,
+              width: `${30 + Math.random() * 50}px`,
+              height: `${30 + Math.random() * 50}px`,
+              background: `radial-gradient(circle at 35% 35%, 
+                rgba(255, 255, 255, 0.9) 0%, 
+                rgba(212, 175, 55, 0.4) 30%, 
+                rgba(244, 228, 166, 0.2) 60%, 
+                transparent 100%)`,
+              backdropFilter: 'blur(3px)',
+              border: '1px solid rgba(212, 175, 55, 0.3)',
+              boxShadow: '0 8px 32px rgba(212, 175, 55, 0.1)'
+            }}
+            animate={{
+              y: [0, -80, -160, -240],
+              x: [0, Math.sin(i * 2) * 60, Math.cos(i * 3) * 40, 0],
+              scale: [0.4, 1, 1.3, 0],
+              opacity: [0, 0.9, 0.7, 0],
+              rotateX: [0, 90, 180, 270],
+              rotateY: [0, 120, 240, 360],
+            }}
+            transition={{
+              duration: 10 + Math.random() * 5,
+              repeat: Infinity,
+              delay: i * 2,
+              ease: "easeOut"
+            }}
+          />
+        ))}
+        
+        {/* Medium Bubbles */}
+        {[...Array(10)].map((_, i) => (
+          <motion.div
+            key={`interactive-bubble-medium-${i}`}
+            className="absolute rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${70 + Math.random() * 30}%`,
+              width: `${15 + Math.random() * 25}px`,
+              height: `${15 + Math.random() * 25}px`,
+              background: `radial-gradient(circle at 30% 30%, 
+                rgba(255, 255, 255, 0.8) 0%, 
+                rgba(244, 228, 166, 0.5) 40%, 
+                rgba(139, 69, 19, 0.3) 70%, 
+                transparent 100%)`,
+              backdropFilter: 'blur(2px)',
+              border: '0.5px solid rgba(244, 228, 166, 0.4)',
+            }}
+            animate={{
+              y: [0, -120, -240, -360],
+              x: [0, Math.sin(i * 4) * 50, Math.cos(i * 2) * 30, 0],
+              scale: [0.3, 0.9, 1.2, 0],
+              opacity: [0, 1, 0.6, 0],
+              rotateZ: [0, 240, 480],
+            }}
+            transition={{
+              duration: 7 + Math.random() * 4,
+              repeat: Infinity,
+              delay: i * 1.2,
+              ease: "easeOut"
+            }}
+          />
+        ))}
+
+        {/* Small Floating Bubbles */}
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={`interactive-bubble-small-${i}`}
+            className="absolute rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${80 + Math.random() * 20}%`,
+              width: `${6 + Math.random() * 12}px`,
+              height: `${6 + Math.random() * 12}px`,
+              background: `radial-gradient(circle at 25% 25%, 
+                rgba(255, 255, 255, 1) 0%, 
+                rgba(212, 175, 55, 0.6) 50%, 
+                transparent 100%)`,
+              filter: 'blur(0.5px)',
+              border: '0.3px solid rgba(255, 255, 255, 0.5)',
+            }}
+            animate={{
+              y: [0, -180, -360, -540],
+              x: [0, Math.sin(i * 6) * 25, 0],
+              scale: [0.2, 0.7, 1, 0],
+              opacity: [0, 1, 0.8, 0],
+            }}
+            transition={{
+              duration: 5 + Math.random() * 3,
+              repeat: Infinity,
+              delay: i * 0.4,
+              ease: "easeOut"
+            }}
+          />
+        ))}
+      </div>
+
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Floating Sparkles */}

@@ -243,6 +243,109 @@ const QuestionPage = ({ onClose, onComplete }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
+      {/* 3D Quiz Bubbles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Quiz Large Bubbles */}
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={`quiz-bubble-large-${i}`}
+            className="absolute rounded-full"
+            style={{
+              left: `${10 + (i * 20)}%`,
+              top: `${15 + Math.sin(i * 3) * 35}%`,
+              width: `${20 + Math.random() * 40}px`,
+              height: `${20 + Math.random() * 40}px`,
+              background: `radial-gradient(circle at 30% 30%, 
+                rgba(255, 255, 255, 0.8) 0%, 
+                rgba(212, 175, 55, 0.4) 35%, 
+                rgba(139, 69, 19, 0.2) 70%, 
+                transparent 100%)`,
+              backdropFilter: 'blur(3px)',
+              border: '1px solid rgba(212, 175, 55, 0.3)',
+            }}
+            animate={{
+              y: [0, -70, -140, -210],
+              x: [0, Math.sin(i * 2) * 50, Math.cos(i * 3) * 30, 0],
+              scale: [0.4, 1, 1.2, 0],
+              opacity: [0, 0.8, 0.6, 0],
+              rotateX: [0, 120, 240, 360],
+              rotateY: [0, 180, 360],
+            }}
+            transition={{
+              duration: 9 + Math.random() * 4,
+              repeat: Infinity,
+              delay: i * 1.8,
+              ease: "easeOut"
+            }}
+          />
+        ))}
+        
+        {/* Quiz Medium Bubbles */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={`quiz-bubble-medium-${i}`}
+            className="absolute rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${70 + Math.random() * 30}%`,
+              width: `${12 + Math.random() * 20}px`,
+              height: `${12 + Math.random() * 20}px`,
+              background: `radial-gradient(circle at 25% 25%, 
+                rgba(255, 255, 255, 0.9) 0%, 
+                rgba(244, 228, 166, 0.5) 40%, 
+                rgba(212, 175, 55, 0.3) 75%, 
+                transparent 100%)`,
+              backdropFilter: 'blur(2px)',
+              border: '0.5px solid rgba(244, 228, 166, 0.4)',
+            }}
+            animate={{
+              y: [0, -100, -200, -300],
+              x: [0, Math.sin(i * 4) * 40, Math.cos(i * 2) * 25, 0],
+              scale: [0.3, 0.8, 1.1, 0],
+              opacity: [0, 1, 0.7, 0],
+              rotateZ: [0, 180, 360],
+            }}
+            transition={{
+              duration: 6 + Math.random() * 3,
+              repeat: Infinity,
+              delay: i * 1,
+              ease: "easeOut"
+            }}
+          />
+        ))}
+
+        {/* Quiz Small Bubbles */}
+        {[...Array(12)].map((_, i) => (
+          <motion.div
+            key={`quiz-bubble-small-${i}`}
+            className="absolute rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${85 + Math.random() * 15}%`,
+              width: `${4 + Math.random() * 8}px`,
+              height: `${4 + Math.random() * 8}px`,
+              background: `radial-gradient(circle at 20% 20%, 
+                rgba(255, 255, 255, 1) 0%, 
+                rgba(212, 175, 55, 0.6) 50%, 
+                transparent 100%)`,
+              filter: 'blur(0.5px)',
+              border: '0.2px solid rgba(255, 255, 255, 0.5)',
+            }}
+            animate={{
+              y: [0, -150, -300, -450],
+              x: [0, Math.sin(i * 5) * 20, 0],
+              scale: [0.2, 0.6, 0.8, 0],
+              opacity: [0, 1, 0.8, 0],
+            }}
+            transition={{
+              duration: 4 + Math.random() * 2,
+              repeat: Infinity,
+              delay: i * 0.3,
+              ease: "easeOut"
+            }}
+          />
+        ))}
+      </div>
       <motion.div
         className="bg-gradient-to-br from-parchment via-gold-light/30 to-parchment max-w-5xl w-full max-h-[95vh] overflow-y-auto rounded-3xl shadow-2xl relative"
         initial={{ scale: 0.8, y: 50 }}
