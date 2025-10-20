@@ -137,7 +137,7 @@ const InteractiveSection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
-              The <span className="text-gradient-gold">Atheria Challenge</span> Game
+              The <span className="text-gradient-gold">Aetheria Challenge</span> Game
             </motion.h2>
 
             {/* Subtitle */}

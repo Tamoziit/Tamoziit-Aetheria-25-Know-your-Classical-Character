@@ -74,7 +74,7 @@ const Footer = () => {
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             >
-              Atheria 2025
+              Aetheria 2025
             </motion.h3>
             <motion.p 
               className="text-gold-light font-elegant text-lg"
