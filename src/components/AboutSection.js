@@ -98,7 +98,7 @@ const AboutSection = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            Atheria is where the grandeur of classical literature comes alive through fashion. 
+            Aetheria is where the grandeur of classical literature comes alive through fashion. 
             Step into a world where iconic characters from timeless tales inspire contemporary elegance, 
             creating a unique fusion of literary heritage and modern style.
           </motion.p>
