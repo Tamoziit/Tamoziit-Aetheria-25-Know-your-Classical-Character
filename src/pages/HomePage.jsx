@@ -26,9 +26,9 @@ const HomePage = () => {
       </div>
 
       <motion.div
-        className="absolute inset-0 bg-black z-[5]"
+        className="absolute inset-0 bg-black/80 z-[5]"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.55 }}
+        animate={{ opacity: 0.45 }}
         transition={{ duration: 1 }}
       />
 
@@ -72,16 +72,16 @@ const HomePage = () => {
 
         <motion.p
           variants={fadeInUp}
-          className="text-xl sm:text-2xl lg:text-3xl font-elegant italic text-white mb-4"
+          className="text-xl font-semibold sm:text-2xl lg:text-3xl font-elegant italic text-white mb-4"
         >
           Fashion Through Classical Literature
         </motion.p>
 
         <motion.p
           variants={fadeInUp}
-          className="text-lg sm:text-xl font-elegant text-white/80 mb-12"
+          className="text-lg font-semibold sm:text-xl font-elegant text-white/80 mb-12"
         >
-          Presented by <span className="font-semibold text-gold">Heritage Fashion Club</span>
+          Presented by <span className="text-2xl font-semibold text-gold">Heritage Fashion Club</span>
         </motion.p>
 
         <motion.div variants={fadeInUp}>
@@ -146,7 +146,7 @@ const HomePage = () => {
         <motion.img
           src="/images/Layer1.png"
           alt="Layer 1"
-          className="absolute bottom-0 w-full object-cover z-[15]"
+          className="absolute bottom-0 w-full object-cover z-[3]"
           initial={{ y: 200, scale: 0.9, opacity: 0 }}
           animate={{ y: [0, -15, 0], opacity: 1, scale: 1 }}
           transition={{
