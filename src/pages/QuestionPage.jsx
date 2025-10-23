@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { questions } from '../data/questions';
 import { characters } from '../data/characters';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const QuestionPage = () => {
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [answers, setAnswers] = useState([]);
 	const [isTransitioning, setIsTransitioning] = useState(false);
+	const navigate = useNavigate();
 
 	const totalQuestions = questions.length;
 	const progressPercentage = ((currentQuestion + 1) / totalQuestions) * 100;
@@ -27,8 +28,9 @@ const QuestionPage = () => {
 			} else {
 				// Quiz completed - calculate result
 				const result = calculateResult(newAnswers);
+				localStorage.setItem("currentResult", JSON.stringify(result));
 				setIsTransitioning(false);
-				console.log(result)
+				navigate("/result");
 			}
 		}, 500);
 	};
@@ -62,6 +64,7 @@ const QuestionPage = () => {
 		const percentage = Math.min(Math.round((maxScore / (totalQuestions * 2)) * 100), 100);
 
 		return {
+			id: winningCharacterId,
 			character: characters[winningCharacterId],
 			score: percentage,
 			correctAnswers: Math.round((percentage / 100) * totalQuestions),
@@ -124,7 +127,7 @@ const QuestionPage = () => {
 				</div>
 
 				{/* Question Content */}
-				<div className="p-4 flex flex-col items-center justify-center w-[90%]">
+				<div className="p-4 flex flex-col items-center justify-center w-[80%]">
 					<AnimatePresence mode="wait">
 						<motion.div
 							key={currentQuestion}
@@ -181,7 +184,7 @@ const QuestionPage = () => {
 										whileHover={{ scale: isTransitioning ? 1 : 1.02, y: isTransitioning ? 0 : -5 }}
 										whileTap={{ scale: isTransitioning ? 1 : 0.98 }}
 									>
-										<div className="flex items-center justify-center gap-4">
+										<div className="flex items-center justify-start gap-4">
 											<div className="w-10 h-10 rounded-full border-2 border-gold/90 group-hover:border-gold group-hover:bg-gold/10 flex items-center justify-center text-gold font-bold transition-all duration-300 flex-shrink-0 mt-1">
 												{String.fromCharCode(65 + index)}
 											</div>
@@ -202,7 +205,7 @@ const QuestionPage = () => {
 					key={question.image}
 					src={question.image}
 					alt="Question image"
-					className="absolute left-0 bottom-0 z-[20] w-[40vh]"
+					className="absolute left-0 bottom-0 z-[20] w-[42vh]"
 					initial={{ opacity: 0, y: 80 }}
 					animate={{ opacity: 1, y: 0 }}
 					exit={{ opacity: 0, y: 80 }}

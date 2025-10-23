@@ -4,7 +4,7 @@ export const questions = [
     category: 'personality',
     question: "At a grand masquerade ball, which role would you naturally gravitate towards?",
     emoji: "🎭",
-    image: "/images/Q1.png",
+    image: "/images/characters/Q1.png",
     options: [
       { text: "The mysterious observer watching from the balcony", id: 'a', traits: ['analytical', 'observant', 'independent'] },
       { text: "The charismatic host welcoming every guest", id: 'b', traits: ['regal', 'charismatic', 'dramatic'] },
@@ -17,7 +17,7 @@ export const questions = [
     category: 'values',
     question: "What drives you most in life?",
     emoji: "⭐",
-    image: "/images/Q2.png",
+    image: "/images/characters/Q2.png",
     options: [
       { text: "The pursuit of knowledge and truth", id: 'a', traits: ['brilliant', 'studious', 'logical'] },
       { text: "Building meaningful relationships and connections", id: 'b', traits: ['loyal', 'spirited', 'principled'] },
@@ -30,7 +30,7 @@ export const questions = [
     category: 'problem-solving',
     question: "When faced with a complex challenge, your approach is:",
     emoji: "🧩",
-    image: "/images/Q3.png",
+    image: "/images/characters/Q3.png",
     options: [
       { text: "Analyze every detail methodically until the solution emerges", id: 'a', traits: ['analytical', 'brilliant', 'logical'] },
       { text: "Trust your instincts and act with conviction", id: 'b', traits: ['strong-willed', 'brave', 'independent'] },
@@ -43,7 +43,7 @@ export const questions = [
     category: 'social',
     question: "In your social circle, you're known as:",
     emoji: "👥",
-    image: "/images/Q4.png",
+    image: "/images/characters/Q4.png",
     options: [
       { text: "The brilliant mind everyone turns to for advice", id: 'a', traits: ['brilliant', 'observant', 'studious'] },
       { text: "The natural leader who takes charge", id: 'b', traits: ['regal', 'ambitious', 'charismatic'] },
@@ -56,7 +56,7 @@ export const questions = [
     category: 'lifestyle',
     question: "Your ideal evening would be:",
     emoji: "🌙",
-    image: "/images/Q5.png",
+    image: "/images/characters/Q5.png",
     options: [
       { text: "Solving puzzles or reading by candlelight", id: 'a', traits: ['analytical', 'studious', 'independent'] },
       { text: "Hosting an elegant dinner party", id: 'b', traits: ['regal', 'charismatic', 'dramatic'] },
@@ -69,7 +69,7 @@ export const questions = [
     category: 'adversity',
     question: "When things don't go according to plan, you:",
     emoji: "⚡",
-    image: "/images/Q6.png",
+    image: "/images/characters/Q6.png",
     options: [
       { text: "Carefully reassess and develop a new strategy", id: 'a', traits: ['logical', 'observant', 'brilliant'] },
       { text: "Adapt quickly and turn it into an opportunity", id: 'b', traits: ['resourceful', 'strong-willed', 'resilient'] },
@@ -82,7 +82,7 @@ export const questions = [
     category: 'communication',
     question: "Your communication style is best described as:",
     emoji: "💬",
-    image: "/images/Q7.png",
+    image: "/images/characters/Q7.png",
     options: [
       { text: "Precise and intellectual, choosing words carefully", id: 'a', traits: ['analytical', 'brilliant', 'logical'] },
       { text: "Commanding and influential, inspiring action", id: 'b', traits: ['regal', 'charismatic', 'ambitious'] },
@@ -95,7 +95,7 @@ export const questions = [
     category: 'legacy',
     question: "How would you want to be remembered?",
     emoji: "👑",
-    image: "/images/Q8.png",
+    image: "/images/characters/Q8.png",
     options: [
       { text: "As someone who solved the unsolvable and advanced human knowledge", id: 'a', traits: ['brilliant', 'analytical', 'observant'] },
       { text: "As a powerful leader who changed the world", id: 'b', traits: ['regal', 'ambitious', 'charismatic'] },
