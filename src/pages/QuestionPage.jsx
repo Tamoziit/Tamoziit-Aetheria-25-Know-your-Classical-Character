@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { questions } from '../data/questions';
-import { characters } from '../data/characters';
 import { Link, useNavigate } from 'react-router-dom';
+import { getTopMatches } from '../utils/getResult.js';
 
 const QuestionPage = () => {
 	const [currentQuestion, setCurrentQuestion] = useState(0);
-	const [answers, setAnswers] = useState([]);
+	const [answers, setAnswers] = useState([]); // stores option ids aligned with questions: ['a','b',...]
 	const [isTransitioning, setIsTransitioning] = useState(false);
 	const navigate = useNavigate();
 
@@ -14,11 +14,11 @@ const QuestionPage = () => {
 	const progressPercentage = ((currentQuestion + 1) / totalQuestions) * 100;
 	const question = questions[currentQuestion];
 
-	const handleAnswer = (selectedOption) => {
+	const handleAnswer = (selectedOptionId) => {
 		if (isTransitioning) return;
 
 		setIsTransitioning(true);
-		const newAnswers = [...answers, selectedOption];
+		const newAnswers = [...answers, String(selectedOptionId).toLowerCase()];
 		setAnswers(newAnswers);
 
 		setTimeout(() => {
@@ -26,8 +26,10 @@ const QuestionPage = () => {
 				setCurrentQuestion(currentQuestion + 1);
 				setIsTransitioning(false);
 			} else {
-				// Quiz completed - calculate result
+				// Quiz completed - calculate result using util functions
+				console.log(newAnswers);
 				const result = calculateResult(newAnswers);
+				console.log(result);
 				localStorage.setItem("currentResult", JSON.stringify(result));
 				setIsTransitioning(false);
 				navigate("/result");
@@ -35,41 +37,16 @@ const QuestionPage = () => {
 		}, 500);
 	};
 
-	const calculateResult = (userAnswers) => {
-		const traitCounts = {};
+	const calculateResult = (newAnswers) => {
+		// top 3 matches (sim, percent, character)
+		const topMatches = getTopMatches(newAnswers, 3);
 
-		// Count trait occurrences
-		userAnswers.forEach(answer => {
-			answer.traits.forEach(trait => {
-				traitCounts[trait] = (traitCounts[trait] || 0) + 1;
-			});
-		});
-
-		// Calculate scores for each character
-		const characterScores = {};
-		Object.keys(characters).forEach(characterId => {
-			let score = 0;
-			characters[characterId].traits.forEach(trait => {
-				score += (traitCounts[trait] || 0) * 2;
-			});
-			characterScores[characterId] = score;
-		});
-
-		// Find winning character
-		const winningCharacterId = Object.keys(characterScores).reduce((a, b) =>
-			characterScores[a] > characterScores[b] ? a : b
-		);
-
-		const maxScore = characterScores[winningCharacterId];
-		const percentage = Math.min(Math.round((maxScore / (totalQuestions * 2)) * 100), 100);
-
-		return {
-			id: winningCharacterId,
-			character: characters[winningCharacterId],
-			score: percentage,
-			correctAnswers: Math.round((percentage / 100) * totalQuestions),
-			totalQuestions: totalQuestions
+		const result = {
+			timestamp: Date.now(),
+			topMatches
 		};
+
+		return result;
 	};
 
 	return (
@@ -175,7 +152,7 @@ const QuestionPage = () => {
 								{question.options.map((option, index) => (
 									<motion.button
 										key={option.id}
-										onClick={() => handleAnswer(option)}
+										onClick={() => handleAnswer(option.id)}
 										disabled={isTransitioning}
 										className="group p-3 bg-white/70 hover:bg-white/90 rounded-2xl text-left transition-all duration-300 border-2 border-transparent hover:border-gold/50 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
 										initial={{ opacity: 0, y: 30 }}
