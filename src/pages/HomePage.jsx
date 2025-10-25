@@ -60,7 +60,7 @@ const HomePage = () => {
 							</motion.span>
 						</div>
 						<motion.span
-							className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-elegant font-normal text-white mt-2"
+							className="block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-elegant font-normal text-white mt-2 text-shadow-deep"
 							initial={{ opacity: 0, y: 30 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.8, ease: "easeOut", delay: 1.5 }}
@@ -72,14 +72,14 @@ const HomePage = () => {
 
 				<motion.p
 					variants={fadeInUp}
-					className="text-xl font-semibold sm:text-2xl lg:text-3xl font-elegant italic text-white mb-4"
+					className="text-xl font-semibold sm:text-2xl lg:text-3xl font-elegant italic text-white mb-4 text-shadow-deep"
 				>
 					Fashion Through Classical Literature
 				</motion.p>
 
 				<motion.p
 					variants={fadeInUp}
-					className="text-lg font-semibold sm:text-xl font-elegant text-white/80 mb-12"
+					className="text-lg font-semibold sm:text-xl font-elegant text-white/80 mb-12 text-shadow-deep"
 				>
 					Presented by <span className="text-2xl font-semibold text-gold">Heritage Fashion Club</span>
 				</motion.p>

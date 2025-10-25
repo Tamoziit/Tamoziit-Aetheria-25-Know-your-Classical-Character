@@ -45,8 +45,21 @@ module.exports = {
           '0%, 100%': { boxShadow: '0 0 0 0 rgba(212, 175, 55, 0.7)' },
           '70%': { boxShadow: '0 0 0 10px rgba(212, 175, 55, 0)' }
         }
-      }
+      },
+      textShadow: {
+        solid: '3px 3px 0 rgba(0, 0, 0, 0.5)',
+        deep: '2px 2px 7px rgba(0,0,0,0.7), 3px 3px 0 rgba(0,0,0,0.4)',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities, theme }) {
+      const newUtilities = {};
+      const shadows = theme('textShadow');
+      for (const [key, value] of Object.entries(shadows)) {
+        newUtilities[`.text-shadow-${key}`] = { textShadow: value };
+      }
+      addUtilities(newUtilities);
+    },
+  ],
 }

@@ -1,3 +1,5 @@
+// TRAIT_NAMES = ['bravery', 'introspection', 'curiosity', 'sociability', 'empathy', 'impulsiveness', 'loyalty', 'resourcefulness'];
+
 export const characters = [
   {
     id: 1,
