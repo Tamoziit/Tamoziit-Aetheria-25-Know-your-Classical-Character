@@ -26,11 +26,43 @@ const QuestionPage = () => {
 				setCurrentQuestion(currentQuestion + 1);
 				setIsTransitioning(false);
 			} else {
-				// Quiz completed - calculate result using util functions
-				console.log(newAnswers);
+				let count = parseInt(localStorage.getItem("totalCount")) || 0;
+				count++;
+				localStorage.setItem("totalCount", count);
+
 				const result = calculateResult(newAnswers);
-				console.log(result);
 				localStorage.setItem("currentResult", JSON.stringify(result));
+
+				let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+				if (result.topMatches && Array.isArray(result.topMatches)) {
+					result.topMatches.forEach(match => {
+						const character = match.character;
+						if (!character) return;
+
+						const existing = leaderboard.find(entry => entry.id === character.id);
+
+						if (existing) {
+							existing.appearances = (existing.appearances || 0) + 1;
+						} else {
+							leaderboard.push({
+								id: character.id,
+								name: character.name,
+								title: character.title,
+								image: character.image,
+								appearances: 1,
+								frequency: 0,
+							});
+						}
+					});
+
+					leaderboard.forEach(entry => {
+						entry.frequency = ((entry.appearances / count) * 100).toFixed(1);
+					});
+
+					localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+				}
+
 				setIsTransitioning(false);
 				navigate("/result");
 			}

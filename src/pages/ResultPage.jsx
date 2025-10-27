@@ -42,8 +42,6 @@ const ResultPage = ({ onViewLeaderboard }) => {
 		);
 	}
 
-	console.log(idx);
-
 	return (
 		<section className="relative min-h-screen flex items-center justify-center overflow-hidden parchment-bg">
 			{/* Background layers */}
@@ -240,12 +238,12 @@ const ResultPage = ({ onViewLeaderboard }) => {
 							>
 								🔄 Play Again
 							</Link>
-							<button
-								onClick={onViewLeaderboard}
+							<Link
+								to="/leaderboard"
 								className="bg-gradient-to-r from-purple-500 to-purple-600 text-white px-8 py-4 rounded-full font-elegant font-semibold hover:shadow-lg transition-all hover:scale-105"
 							>
 								🏆 View Leaderboard
-							</button>
+							</Link>
 						</motion.div>
 					</div>
 				</motion.div>
