@@ -81,7 +81,7 @@ const HomePage = () => {
 					variants={fadeInUp}
 					className="text-lg font-semibold sm:text-xl font-elegant text-white/80 mb-12 text-shadow-deep"
 				>
-					Presented by <span className="text-2xl font-semibold text-gold">Heritage Fashion Club</span>
+					Presented by <span className="text-2xl font-semibold text-gold">The Heritage Fashion Club</span>
 				</motion.p>
 
 				<motion.div variants={fadeInUp}>

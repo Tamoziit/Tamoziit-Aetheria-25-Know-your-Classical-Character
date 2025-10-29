@@ -135,13 +135,14 @@ export function getTopMatches(answers, topN = 3) {
   const sims = getAllSimilarities(userVector);
   const top = sims.slice(0, topN);
 
-  // use non-negative sims for percent distribution (cosine should be >= -1..1,
-  // but in our domain most vectors are non-negative; we clamp negatives to 0)
-  const sum = top.reduce((s, t) => s + Math.max(0, t.sim), 0) || 1;
+  return top.map(t => {
+    const sim = Number(t.sim.toFixed(4));
+    const percent = Number((Math.max(0, sim) * 100).toFixed(1));
 
-  return top.map(t => ({
-    character: t.raw,
-    sim: Number(t.sim.toFixed(4)),
-    percent: Number(((Math.max(0, t.sim) / sum) * 100).toFixed(1)),
-  }));
+    return {
+      character: t.raw,
+      sim,
+      percent
+    };
+  });
 }
