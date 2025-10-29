@@ -97,7 +97,7 @@ const QuestionPage = () => {
 			/>
 
 			<motion.div
-				className="relative z-[2] bg-center bg-cover bg-no-repeat w-full max-w-4xl min-h-[80vh] mx-4 flex flex-col items-center justify-center"
+				className="relative z-[20] bg-center bg-cover bg-no-repeat w-full max-w-4xl min-h-[80vh] mx-4 flex flex-col items-center justify-center"
 				style={{
 					backgroundImage: `url("/images/QuestionOverlay.png")`,
 					filter: 'brightness(1.05) contrast(1.05)'
