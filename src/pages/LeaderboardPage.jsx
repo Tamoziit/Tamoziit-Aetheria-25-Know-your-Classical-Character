@@ -23,6 +23,8 @@ const LeaderboardPage = () => {
     );
   }
 
+  console.log(leaderBoard)
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden parchment-bg p-4">
       {/* Background layers */}

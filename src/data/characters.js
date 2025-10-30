@@ -78,5 +78,57 @@ export const characters = [
     quote: 'Tomorrow is another day!',
     modernStyle: 'Bold colors, dramatic silhouettes, statement accessories, feminine power dressing',
     era: 'Civil War Era'
+  },
+  {
+    id: 7,
+    name: 'Hamlet',
+    title: 'The Tragic Thinker',
+    image: '/images/characters/Q7.png',
+    color: 'from-slate-600 via-indigo-700 to-slate-800',
+    traits: ['philosophical', 'introspective', 'melancholic', 'intelligent', 'conflicted'],
+    traitVector: [0.55, 0.95, 0.70, 0.45, 0.65, 0.25, 0.80, 0.75],
+    description: 'A thinker tormented by the weight of conscience and destiny, you ponder deeply before you act. Your style leans toward the dramatic and contemplative, mirroring your complex inner world.',
+    quote: 'To be, or not to be: that is the question.',
+    modernStyle: 'Dark academia aesthetic — layered textures, muted tones, thoughtful tailoring',
+    era: 'Elizabethan England'
+  },
+  {
+    id: 8,
+    name: 'Byomkesh Bakshi',
+    title: 'The Satyanweshi (Truth-Seeker)',
+    image: '/images/characters/C7.png',
+    color: 'from-stone-500 via-amber-600 to-stone-700',
+    traits: ['intelligent', 'observant', 'principled', 'patient', 'logical'],
+    traitVector: [0.85, 0.85, 0.90, 0.50, 0.70, 0.30, 0.90, 0.95],
+    description: 'Analytical and calm under pressure, you seek truth not for fame but for justice. Your minimal yet elegant style reflects a quiet confidence and refined intellect.',
+    quote: 'Detective নয় সত্যান্বেষী।',
+    modernStyle: 'Classic Indian minimalism — khadi, neutrals, timeless silhouettes',
+    era: 'Colonial Bengal'
+  },
+  {
+    id: 9,
+    name: 'Charulata',
+    title: 'The Lonely Muse',
+    image: '/images/characters/C8.png',
+    color: 'from-sky-300 via-indigo-400 to-blue-500',
+    traits: ['introspective', 'sensitive', 'creative', 'curious', 'emotional'],
+    traitVector: [0.45, 0.90, 0.85, 0.55, 0.85, 0.35, 0.70, 0.65],
+    description: 'You are deeply thoughtful, artistic, and emotionally perceptive. Torn between societal expectations and personal desires, your quiet strength shines through your creative spirit.',
+    quote: 'The heart seeks what the mind hesitates to name.',
+    modernStyle: 'Soft elegance — cotton sarees, delicate patterns, subtle jewelry',
+    era: '19th Century Bengal'
+  },
+  {
+    id: 10,
+    name: 'Julius Caesar',
+    title: 'The Ambitious Conqueror',
+    image: '/images/characters/C9.png',
+    color: 'from-red-600 via-gold-500 to-orange-600',
+    traits: ['brave', 'charismatic', 'ambitious', 'strategic', 'decisive'],
+    traitVector: [0.95, 0.55, 0.70, 0.85, 0.50, 0.80, 0.65, 0.90],
+    description: 'You command respect with courage and vision. Ambition drives you forward, and your style exudes power — every gesture deliberate, every choice a statement.',
+    quote: 'Veni, vidi, vici — I came, I saw, I conquered.',
+    modernStyle: 'Power suits, regal tones, bold accessories symbolizing leadership',
+    era: 'Ancient Rome'
   }
 ];
